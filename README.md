@@ -180,30 +180,129 @@ Linux supports custom hardware, including embedded systems and GPUs.
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-1.2 Summarize Linux device management concepts and tools.
 1.3 Given a scenario, manage storage in a Linux System
+### **1. Logical Volume Manager (LVM)**
+
+### **Logical Volume**
+
+- Flexible storage management tool for resizing, creating, and managing volumes.
+- **Commands:**
+    - `lvchange`: Change attributes of a logical volume.
+    - `lvcreate`: Create a logical volume.
+    - `lvdisplay`: Display details of logical volumes.
+    - `lvremove`: Remove a logical volume.
+    - `lvresize/lvextend`: Resize or extend a logical volume.
+    - `lvs`: Summarize logical volumes.
+
+### **Volume Group**
+
+- Aggregates physical volumes to provide storage for logical volumes.
+- **Commands:**
+    - `vgcreate`: Create a volume group.
+    - `vgdisplay`: Display volume group details.
+    - `vgextend`: Add physical volumes to a volume group.
+    - `vgexport/vgimport`: Export/import a volume group for use on another system.
+    - `vgremove`: Remove a volume group.
+    - `vgs`: Summarize volume groups.
+    - `vgscan`: Scan for volume groups.
+
+### **Physical Volume**
+
+- Represents the physical storage medium used in LVM.
+- **Commands:**
+    - `pvcreate`: Create a physical volume.
+    - `pvdisplay`: Display details of physical volumes.
+    - `pvremove`: Remove a physical volume.
+    - `pvresize`: Resize a physical volume.
+    - `pvs`: Summarize physical volumes.
+    - `pvscan`: Scan for physical volumes.
+
+---
+
+### **2. Partitions**
+
+- Dividing physical storage into logical sections for better management.
+- **Commands:**
+    - `blkid`: Display block device attributes.
+    - `fdisk/gdisk`: Partition a disk.
+    - `growpart`: Expand a partition.
+    - `lsblk`: List block devices.
+    - `parted`: Create and manage partitions.
+
+---
+
+### **3. Filesystems**
+
+### **Formats**
+
+- Common Linux filesystems:
+    - `xfs`: High-performance journaling filesystem.
+    - `ext4`: Standard filesystem with extended journaling and performance.
+    - `btrfs`: Advanced filesystem with features like snapshots and compression.
+    - `tmpfs`: Temporary in-memory filesystem.
+
+### **Utilities**
+
+- Commands for managing and troubleshooting filesystems:
+    - `df`: Check disk space usage.
+    - `du`: Check directory/file space usage.
+    - `fio`: Benchmark I/O performance.
+    - `fsck`: Check and repair a filesystem.
+    - `mkfs`: Create a new filesystem.
+    - `resize2fs`: Resize ext2/3/4 filesystems.
+    - `xfs_growfs`: Grow an XFS filesystem.
+    - `xfs_repair`: Repair an XFS filesystem.
+
+---
+
+### **4. Redundant Array of Independent Disks (RAID)**
+
+- Combines multiple disks for redundancy or performance.
+- **Commands/Tools:**
+    - `/proc/mdstat`: Monitor RAID arrays.
+    - `mdadm`: Manage and create RAID arrays.
+
+---
+
+### **5. Mounted Storage**
+
+### **Mounting**
+
+- Mount storage devices for use.
+- Files:
+    - `/etc/fstab`: Persistent mount configuration.
+    - `/etc/mtab`: Active mounted filesystems.
+    - `/proc/mounts`: Mounted filesystem details.
+- **Commands:**
+    - `autofs`: Automounting file systems on demand.
+    - `mount`: Mount a filesystem.
+    - `umount`: Unmount a filesystem.
+
+### **Mount Options**
+
+- Options to control how filesystems are mounted:
+    - `noatime`: Do not update file access times.
+    - `nodev`: Do not allow device files.
+    - `nodiratime`: Do not update directory access times.
+    - `noexec`: Prevent execution of binaries.
+    - `nofail`: Do not fail if the device is not available.
+    - `nosuid`: Ignore set-user-ID and set-group-ID bits.
+    - `remount`: Remount an already mounted filesystem.
+    - `ro`: Mount read-only.
+    - `rw`: Mount read-write.
+
+### **Network Mounts**
+
+- Mount shared storage over the network.
+    - **Network File System (NFS):** For mounting remote directories.
+    - **Server Message Block (SMB)/Samba:** For mounting Windows shares.
+
+---
+
+### **6. Inodes**
+
+- Data structures containing metadata about files.
+- Limited by the filesystem and can cause issues if exhausted
 1.4 Given a scenario, manage network services and configurations on a Linux server.
 1.5 Given a scenario, manage a Linux system using common shell operations
 1.6 Given a scenario, perform backup and restore operations for a Linux server.
