@@ -304,6 +304,194 @@ Linux supports custom hardware, including embedded systems and GPUs.
 - Data structures containing metadata about files.
 - Limited by the filesystem and can cause issues if exhausted
 1.4 Given a scenario, manage network services and configurations on a Linux server.
+  1. Network Configuration
+a) /etc/hosts
+Defines hostname-to-IP mappings.
+Example: Add a custom hostname:
+echo "192.168.1.10 myserver.local" >> /etc/hosts
+​
+b) /etc/resolv.conf
+Configures DNS servers.
+Example: Add a DNS server:
+echo "nameserver 8.8.8.8" >> /etc/resolv.conf
+​
+c) /etc/nsswitch.conf
+Determines the order of name resolution.
+Example: Edit for DNS preference:
+hosts: files dns
+​
+2. NetworkManager
+a) nmcli
+A command-line tool to manage network connections.
+List connections:
+nmcli connection show
+​
+Connect to a Wi-Fi network:
+nmcli device wifi connect "SSID" password "password"
+​
+b) nmconnect
+Simplifies connecting to Wi-Fi or VPN (useful for scripts).
+Example:
+nmconnect "SSID" password "password"
+​
+3. Netplan
+a) netplan apply
+Applies network configuration changes.
+Example:
+sudo netplan apply
+b) netplan status
+Shows the current status of network configurations.
+Example:
+netplan status
+​
+c) netplan try
+Tests a new configuration before applying it permanently.
+Example:
+sudo netplan try
+​
+d) Configuration Files
+Located in /etc/netplan/.
+Example Configuration:
+network:
+  version: 2
+  ethernets:
+    eth0:
+      dhcp4: true
+​
+4. Common Network Tools
+a) arp
+Displays the ARP table.
+Example:
+arp -a
+​
+b) curl
+Transfers data from URLs.
+Example:
+curl http://example.com
+​
+c) dig
+Performs DNS lookups.
+Example:
+dig example.com
+​
+d) ethtool
+Displays or changes Ethernet device settings.
+Example:
+ethtool eth0
+### **e) `hostname`**
+
+Displays or sets the system hostname.
+
+**Example:**
+
+```bash
+hostnamectl set-hostname new-hostname
+```
+
+### **f) `ip`**
+
+A versatile tool for network management.
+
+- **Show IP addresses:**
+    
+    ```bash
+    ip address
+    ```
+    
+- **Show network interfaces:**
+    
+    ```bash
+    ip link
+    ```
+    
+- **Show routes:**
+    
+    ```bash
+    ip route
+    ```
+    
+
+### **g) `iperf3`**
+
+Tests network bandwidth.
+
+**Example:**
+
+On the server:
+
+```bash
+iperf3 -s
+```
+
+On the client:
+
+```bash
+iperf3 -c server_ip
+```
+
+### **h) `mtr`**
+
+Combines traceroute and ping for network diagnostics.
+
+**Example:**
+
+```bash
+mtr example.com
+```
+
+### **i) `nc` (Netcat)**
+
+Reads/writes over network connections.
+
+**Example:**
+
+```bash
+nc -zv example.com 80
+```
+
+- Tests if port 80 is open on `example.com`.
+
+### **j) `nmap`**
+
+Scans networks for open ports and services.
+
+**Example:**
+
+```bash
+nmap example.com
+```
+
+### **k) `nslookup`**
+Performs DNS lookups.
+Example:
+nslookup example.com
+​
+l) ping/ping6
+Sends ICMP packets to test connectivity.
+Example:
+ping example.com
+​
+m) ssh
+Connects to a remote server via SSH.
+Example:
+ssh user@remote_server
+​
+n) tcpdump
+Captures network packets for analysis.
+Example:
+tcpdump -i eth0
+​
+o) tracepath
+Traces the route to a destination.
+Example:
+tracepath example.com
+​
+p) traceroute
+Traces the route to a destination (more detailed than tracepath).
+Example:
+traceroute example.com
+
+
 1.5 Given a scenario, manage a Linux system using common shell operations
 1.6 Given a scenario, perform backup and restore operations for a Linux server.
 1.7 Summarize virtualization on Linux systems.
