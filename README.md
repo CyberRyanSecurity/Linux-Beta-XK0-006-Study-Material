@@ -493,5 +493,85 @@ traceroute example.com
 
 
 1.5 Given a scenario, manage a Linux system using common shell operations
+### **1. Common Environmental Variables**
+
+Environmental variables store configuration details for the shell and system. Common ones include:
+
+- **DISPLAY:** Defines the display server for GUI applications.
+- **HOME:** The path to the user's home directory (e.g., `/home/username`).
+- **PATH:** A list of directories where the shell looks for executable commands.
+- **PS1:** Defines the appearance of the shell prompt.
+- **SHELL:** The user's default shell (e.g., `/bin/bash`).
+- **USER:** The current logged-in username.
+
+---
+
+### **2. Paths**
+
+Paths specify the location of files and directories:
+
+- **Absolute Paths:** Start from the root directory (`/`) and provide the full path to a file (e.g., `/etc/passwd`).
+- **Relative Paths:** Refer to locations relative to the current directory.
+    - **.** (Single dot): Represents the current directory.
+    - **..** (Double dot): Represents the parent directory.
+    - **~** (Tilde): Represents the home directory of the current user.
+
+---
+
+### **3. Shell Environment Configurations**
+
+Configuration files customize the shell environment:
+
+- **.bashrc:** Contains user-specific shell preferences and aliases, loaded in interactive non-login shells.
+- **.bash_profile:** Loaded for login shells, used for setting environment variables.
+- **.profile:** A generic configuration file for login shells, often used with non-Bash shells.
+
+---
+
+### **4. Channel Redirection**
+
+Shell redirection manipulates input and output streams:
+
+- **<**: Redirects input from a file.
+- **>**: Redirects output to a file (overwriting).
+- **>>**: Appends output to a file.
+- **<< (Here Docs):** Redirects a block of input directly into a command.
+- **Standard Output (stdout):** Default output stream (descriptor 1).
+- **Standard Error (stderr):** Default error stream (descriptor 2).
+- **Standard Input (stdin):** Default input stream (descriptor 0).
+- ### **5. Basic Shell Utilities**
+
+Common commands for managing text, files, and processes:
+
+- **! and !!**: Rerun previous commands (`!` for a specific command, `!!` for the last command).
+- **alias:** Create shortcuts for commands.
+- **awk:** Process and manipulate text files.
+- **bc:** A command-line calculator.
+- **cat:** Concatenate and display file contents.
+- **cut:** Extract sections of text from files.
+- **echo:** Print text to stdout.
+- **grep:** Search for text patterns in files.
+- **head and tail:** Display the first or last lines of a file.
+- **history:** Display command history.
+- **less and more:** View text files one screen at a time.
+- **printf:** Format and print output.
+- **sed:** Stream editor for text manipulation.
+- **sort:** Sort lines of text.
+- **source:** Execute a script in the current shell.
+- **tee:** Redirect output to a file and stdout simultaneously.
+- **tr:** Translate or delete characters.
+- **uname:** Display system information.
+- **uniq:** Remove duplicate lines.
+- **wc:** Count lines, words, and characters in a file.
+- **xargs:** Build and execute command lines from input.
+
+---
+
+### **6. Text Editors**
+
+Editors for creating and modifying files:
+
+- **vi/vim:** Powerful text editor for advanced users.
+- **nano:** Simple and user-friendly text editor.
 1.6 Given a scenario, perform backup and restore operations for a Linux server.
 1.7 Summarize virtualization on Linux systems.
