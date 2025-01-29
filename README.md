@@ -574,4 +574,141 @@ Editors for creating and modifying files:
 - **vi/vim:** Powerful text editor for advanced users.
 - **nano:** Simple and user-friendly text editor.
 1.6 Given a scenario, perform backup and restore operations for a Linux server.
+  1. Archiving Tools
+a) cpio
+Used for creating or extracting archive files.
+Examples:
+Create an archive from a list of files:
+ls | cpio -ov > archive.cpio
+​
+Extract an archive:
+cpio -idv < archive.cpio
+​
+Copy files from one directory to another:
+find . -type f | cpio -pdm /destination/directory
+b) tar
+A widely used archiving tool for creating .tar files.
+Examples:
+Create a tar archive:
+tar -cvf archive.tar file1 file2
+​
+Extract a tar archive:
+bash
+Copy code
+tar -xvf archive.tar
+​
+Create and compress with gzip:
+tar -czvf archive.tar.gz file1 file2
+​
+Extract a gzip-compressed tar archive:
+tar -xzvf archive.tar.gz
+​
+List the contents of a tar archive:
+tar -tvf archive.tar
+2. Compression Tools
+a) 7-Zip
+A high-compression ratio tool.
+Examples:
+Compress a file:
+7z a archive.7z file1
+​
+Extract a .7z file:
+7z x archive.7z
+​
+List contents of a .7z archive:
+7z l archive.7z
+b) bzip2
+Compresses files with .bz2 format.
+Examples:
+Compress a file:
+bzip2 file.txt
+​
+Decompress a .bz2 file:
+bunzip2 file.txt.bz2
+c) gzip
+Compresses files with .gz format.
+Examples:
+Compress a file:
+gzip file.txt
+​
+Decompress a .gz file:
+gunzip file.txt.g
+d) unzip
+Used to extract .zip files.
+Examples:
+Extract a .zip file:
+unzip archive.zip
+​
+List the contents of a .zip file:
+unzip -l archive.zip
+e) xz
+Compresses files with .xz format.
+Examples:
+Compress a file:
+xz file.txt
+​
+Decompress an .xz file:
+unxz file.txt.xz
+3. Other Tools
+a) dd
+Used for low-level copying and disk imaging.
+Examples:
+Create a disk image:
+dd if=/dev/sdX of=disk.img bs=1M
+​
+Restore a disk image:
+dd if=disk.img of=/dev/sdX bs=1M
+​
+Wipe a disk with random data:
+dd if=/dev/urandom of=/dev/sdX bs=1M
+b) ddrescue
+Used to recover data from damaged disks.
+Examples:
+Clone a failing disk:
+ddrescue /dev/sdX disk.img logfile
+
+
+​
+Resume a previously interrupted rescue:
+ddrescue -r 3 /dev/sdX disk.img logfile
+c) rsync
+Used for fast and efficient file or directory synchronization.
+Examples:
+Synchronize a local directory:
+rsync -av /source/directory /destination/directory
+
+
+​
+Sync files to a remote server:
+rsync -av file.txt user@remote:/path/to/destination
+
+
+​
+Show progress while syncing:
+rsync -av --progress file.txt /destination
+d) zcat
+Reads compressed .gz files without extracting them.
+Examples:
+Display the contents of a compressed file:
+zcat file.txt.gz
+
+
+​
+e) zgrep
+Searches inside .gz compressed files.
+Examples:
+Search for a term in a .gz file:
+zgrep "pattern" file.txt.gz
+
+
+​
+f) zless
+Displays the contents of a .gz file with pagination.
+Examples:
+View a compressed file page-by-page:
+zless file.txt.gz
+
+
+
+
 1.7 Summarize virtualization on Linux systems.
