@@ -712,3 +712,152 @@ zless file.txt.gz
 
 
 1.7 Summarize virtualization on Linux systems.
+1. Linux Hypervisors
+A hypervisor is software or firmware that allows you to run virtual machines (VMs) on a physical host.
+a) Quick Emulator (QEMU)
+A generic and open-source machine emulator and virtualizer.
+Can emulate hardware entirely, making it platform-independent.
+Works well with KVM to improve performance through hardware acceleration.
+Example:
+Start a virtual machine using QEMU:
+qemu-system-x86_64 -enable-kvm -m 2048 -hda disk.img
+
+
+​
+b) Kernel-based Virtual Machine (KVM)
+A Linux kernel module that enables hardware virtualization.
+Turns the Linux kernel into a hypervisor.
+Used in conjunction with tools like QEMU for full virtualization.
+Command to check KVM support:
+lsmod | grep kvm
+2. Virtual Machines (VMs)
+a) Paravirtualized Drivers
+Enhance VM performance by enabling the guest OS to interact more efficiently with the host.
+VirtIO is a standard for paravirtualized drivers, improving performance for devices like network and disk.
+b) Disk Image Operations
+Convert: Change disk formats using qemu-img.Example:
+qemu-img convert -f raw -O qcow2 disk.img disk.qcow2
+
+
+​
+Resize: Increase or decrease the size of a disk image.Example:
+qemu-img resize disk.qcow2 +10G
+
+
+​
+Image Properties: Check or modify attributes of disk images.Example:
+qemu-img info disk.qcow2
+
+
+​
+c) VM States
+VMs can be in various states: running, paused, stopped, or saved.
+Example (pause a VM with virsh):
+virsh suspend vm_name
+d) Nested Virtualization
+Running a hypervisor inside another VM.
+Requires hardware support (e.g., Intel VT-x or AMD-V).
+Example (enable nested virtualization):
+echo "options kvm-intel nested=1" > /etc/modprobe.d/kvm-intel.conf
+3. VM Operations
+a) Resources
+Storage: Allocate virtual disks to a VM.
+RAM: Define memory for the VM during creation.Example:
+qemu-system-x86_64 -m 4096 -hda disk.img
+
+
+​
+CPU: Assign specific CPU cores to a VM.
+b) Baseline Image Templates
+Create base VM images to speed up deployment.
+Example: Clone a base image to create a new VM:
+qemu-img create -f qcow2 -b base.qcow2 new_vm.qcow2
+
+c) Cloning
+Duplicate an existing VM or its disk.
+Example:
+virt-clone --original vm_name --name new_vm_name --file /path/to/new_disk.img
+
+
+​
+d) Migrations
+Move a VM between hosts without stopping it (live migration).
+Example:
+virsh migrate --live vm_name qemu+ssh://destination_host/system
+
+
+​
+e) Snapshots
+Save the state of a VM at a specific point in time.
+Example:
+virsh snapshot-create-as vm_name snapshot_name
+
+### **4. Bare Metal vs. Virtual Machines**
+
+| Feature | Bare Metal | Virtual Machines |
+| --- | --- | --- |
+| Performance | Direct hardware access (faster). | Slight overhead due to virtualization. |
+| Flexibility | Limited to OS installed on hardware. | Multiple OS instances on a single host. |
+| Cost | Higher (dedicated hardware). | Lower (multiple VMs share resources). |
+### **5. Network Types**
+
+Different ways VMs communicate with the host and external networks:
+
+### **a) Bridged**
+
+- VMs share the host's physical network interface.
+- Appears as if VMs are directly connected to the external network.
+- **Example (via `virsh`):**
+    
+    ```bash
+    virsh attach-interface vm_name --type bridge --source br0 --model virtio
+    
+    ```
+    
+
+### **b) Network Address Translation (NAT)**
+
+- VMs access the external network through the host's IP address.
+- Default networking mode in many setups.
+
+### **c) Host-Only/Isolated**
+
+- VMs communicate only with the host and other VMs, not the external network.
+
+### **d) Routed**
+
+- VMs are on a separate network and can communicate with the external network via routing.
+
+### **e) Open**
+
+- A completely unrestricted network, typically used for specific testing scenarios.
+
+- ### **6. Virtual Machine Tools**
+
+### **a) `libvirt`**
+
+- A toolkit for managing virtualization platforms like KVM and QEMU.
+- Provides APIs and a daemon (`libvirtd`) for managing VMs.
+
+### **b) `virsh`**
+
+- Command-line tool for managing VMs via `libvirt`.**Examples:**
+1. Start a VM:
+    
+    ```bash
+    virsh start vm_name
+    
+    ```
+    
+2. List all VMs:
+    
+    ```bash
+    virsh list --all
+    
+    ```
+    
+
+### **c) `virt-manager`**
+
+- A GUI-based tool to manage VMs.
+- Provides an easy-to-use interface for creating, configuring, and managing virtual machines.
